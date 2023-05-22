@@ -5,7 +5,6 @@
             $madb = new PDO('sqlite:bdd/bdd_produit/bdd_produit.sqlite');
             $madb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);				
             $request=$requete;
-            echo $request;
             $res=$madb->query($request);
             $tab=$res->fetchAll(PDO::FETCH_ASSOC);
             return $tab;
@@ -85,13 +84,13 @@
 
     function login($login, $password) {
         try {
-            $tab_login = request_login('SELECT login FROM table_login ;');
+            $tab_login = request_login('SELECT login FROM login ;');
             $login = request_quote($login);
             $password = request_quote($password);
         
             if(VarInTab($tab_login, $login)) {
                 // $req="SELECT password FROM login_data WHERE login='".$login."';";
-                $tab_password = request_login("SELECT password FROM table_login WHERE login=".$login.";");
+                $tab_password = request_login("SELECT password FROM login WHERE login=".$login.";");
                 foreach($tab_password as $ligne_password) {
                     foreach($ligne_password as $pass_login) {
                         if($password == request_quote($pass_login)) {
@@ -113,5 +112,10 @@
         }
         return $res;
     }
+
+    function redirection($page) {
+        header("location: $page");
+    }
+
 ?>
 

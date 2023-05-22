@@ -16,6 +16,7 @@ CREATE TABLE  produit  (
 	prixTTC  FLOAT(4,2) NOT NULL,
 	designation  VARCHAR(100) NOT NULL,
 	forfaitLivraison  int(3) NOT NULL,
+	image_produit TEXT NOT NULL,
 	CONSTRAINT fk_Cat FOREIGN KEY (idCat) REFERENCES categorieproduit(idCat) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_Forfait FOREIGN KEY (forfaitLivraison) REFERENCES forfaitLivraison(idForfait) ON DELETE CASCADE ON UPDATE CASCADE
 )  ;
@@ -23,11 +24,7 @@ CREATE TABLE  produit  (
 -- Vider tout les tuples de forfaitLivraison :
 -- DELETE FROM forfaitlivraison ;
 
-INSERT INTO forfaitLivraison (description, montant) VALUES ('Forfait Bronze', 5);
-INSERT INTO forfaitLivraison (description, montant) VALUES ('Forfait Silver', 10);
-INSERT INTO forfaitLivraison (description, montant) VALUES ('Forfait Silver +', 12);
-INSERT INTO forfaitLivraison (description, montant) VALUES ('Forfait Gold', 15);
-INSERT INTO forfaitLivraison (description, montant) VALUES ('Forfait Gold +', 17);
+
 
 -- Vider tout les tuples de categorieproduit :
 -- DELETE FROM categorieproduit ;
@@ -39,5 +36,5 @@ INSERT INTO categorieproduit (intitule, description) VALUES ('Cuisine', 'Produit
 -- Vider tout les tuples de categorieproduit :
 -- DELETE FROM produit ;
 
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Nourriture'), 17.99, 'Haribo', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1)) ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 30.99, 'Nintendo Switch', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1)) ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image_produit ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Nourriture'), 17.99, 'Haribo', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), CHEMIN_IMAGE) ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image_produit ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 30.99, 'Nintendo Switch', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), CHEMIN_IMAGE) ;

@@ -13,19 +13,42 @@
 </head>
 <body>
     <?php
+        $redirect = false;
         if (!empty($_POST) && isset($_POST['login'])) {
+            // Récupérer le login et l'adresse IP
+            $login = $_POST['login'];
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+            // Informations par défaut.
+            $statut_connexion = false; // statut de connexion (false = échec, true = réussite)
+            $statut_personne = ''; // statut de la personne (vide si la connexion a échoué)
+            
             if (login($_POST['login'], $_POST['password'])) {
+                $statut_connexion = true;
                 $_SESSION['ouverture'] = 'Connected';
                 $_SESSION['login'] = $_POST['login'];
-                $tab_status = request_login("SELECT status_session FROM table_login WHERE login='".$_POST['login']."';");
+                $tab_status = request_login("SELECT status_session FROM login WHERE login='".$_POST['login']."';");
                 if (firstTabVal($tab_status) == 'admin') {
-                    $_SESSION['status'] = 'admin';
+                    $statut_personne = 'admin';
+                    $_SESSION['status'] = $statut_personne;
                 } else {
-                    $_SESSION['status'] = 'etu';
+                    $statut_personne = 'etu';
+                    $_SESSION['status'] = $statut_personne;
                 }
-                header('location: index.php');
+                $redirect = true;
+
             } else {
                 echo '<p>Mauvaise paire Login / Mot de passe</p>';
+            }
+
+            // Enregistrer les informations dans le fichier de log
+            $log = fopen('logs/connexion', 'a'); // Ouverture en mode ajout
+            if ($log) {
+                $heure = date('Y-m-d H:i:s');
+                $statut = ($statut_connexion) ? 'réussie' : 'échouée';
+                $message = "$heure - Tentative de connexion $statut - Login: $login - IP: $ip - Statut de la personne: $statut_personne\n";
+                fwrite($log, $message);
+                fclose($log);
             }
         }
     ?>
@@ -38,6 +61,17 @@
         </fieldset>
         <p id="check_login"></p>
     </form>
-    <script src="js/connexion.js" type="text/javascript"></script>
+    <script src="js/js_personnel/connexion.js" type="text/javascript"></script>
 </body>
 </html>
+
+<?php
+    if ($redirect == true) {
+        redirection('index.php');
+    }
+
+    if (!empty($_GET) && isset($_GET) && $_GET['status'] == 'deconnect') {
+        $_SESSION = array();
+        session_destroy();
+    }
+?>

@@ -1,6 +1,9 @@
 <?php
     session_start();
     include('fonctions.php');
+    if (empty($_SESSION)) {
+      redirection('connexion.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +18,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="index.html">PROJET WEB</a>
+        <a class="navbar-brand" href="index.php">PROJET WEB</a>
         <button
           class="navbar-toggler navbar-toggler-right"
           type="button"
@@ -35,11 +38,23 @@
             <li class="nav-item">
               <a class="nav-link" href="index.php">Accueil</a>
             </li>
+            <?php 
+              if ($_SESSION['status'] == 'admin') {
+            ?>
             <li class="nav-item">
-              <a class="nav-link" href="connexion.php">Connexion</a>
+              <a class="nav-link" href="insertion.php">Insertion</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="modification.php">Modification</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="suppression.php">Suppression</a>
+            </li>
+            <?php
+              }
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="connexion.php?status=deconnect">Se déconnecter</a>
             </li>
           </ul>
         </div>
@@ -48,8 +63,10 @@
 
     <div class="container">
         <?php
-            null;
+            $tab_produits = request_produit('SELECT designation produit, intitule categorie, forfaitlivraison.description livraison, prixTTC FROM produit INNER JOIN categorieproduit ON produit.idCat = categorieproduit.idCat INNER JOIN forfaitlivraison ON produit.forfaitlivraison = forfaitlivraison.idForfait;');
+            afficheTableauAssoc($tab_produits);
         ?>
     </div>
+    <script src="js/js_personnel/navbar.js"></script>
 </body>
 </html>
