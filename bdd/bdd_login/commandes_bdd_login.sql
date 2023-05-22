@@ -3,7 +3,8 @@ CREATE TABLE login (
 	"mail"	TEXT NOT NULL,
 	"login"	TEXT NOT NULL,
 	"password"	TEXT NOT NULL,
+	"status_session" TEXT DEFAULT 'etu',
 	PRIMARY KEY("idUser" AUTOINCREMENT)
 );
 
-INSERT INTO login (mail, login, password) VALUES ('test@test.fr', 'Test@_', 'lannion') ;
+INSERT INTO login (mail, login, password, status_session) VALUES ('test@test.fr', 'Test@_', 'lannion', 'admin') ;
