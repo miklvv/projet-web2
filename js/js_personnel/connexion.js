@@ -13,13 +13,29 @@ function verifierFormulaire() {
 }
 
 function test_login() {
-    var car_et_maj = verifierFormulaire(); // car_et_maj prend true ou false
-    if (car_et_maj) {
-        insertion = 'Login conforme.';
+    var car_et_maj = verifierFormulaire();
+    if (!car_et_maj) {
+        login_input_class = 'border_red';
     } else {
-        insertion = 'Login non conforme.';
+        login_input_class = 'border_green';
     }
-    document.getElementById('check_login').innerHTML=insertion; // Ecrit un message ou l'autre dans le champ de texte 'check_login'
+    value_login_actuelle = document.getElementById('id_input_login').classList.value;
+    if (value_login_actuelle != login_input_class) {
+        document.getElementById('id_input_login').classList.replace(value_login_actuelle, login_input_class)
+    }
+}
+
+function test_password() {
+    var entree_password = document.getElementById('id_input_password').value;
+    if (entree_password == '') {
+        password_input_class = 'border_red';
+    } else {
+        password_input_class = 'border_green';
+    }
+    value_password_actuelle = document.getElementById('id_input_password').classList.value;
+    if (value_password_actuelle != password_input_class) {
+        document.getElementById('id_input_password').classList.replace(value_password_actuelle, password_input_class)
+    }
 }
 
 const formulaire = document.querySelector("form");
@@ -35,3 +51,4 @@ formulaire.addEventListener("submit", function(event) { // Quand l'utilisateur e
 });
 
 setInterval(test_login, 500) // Effectue la fonction test_login toutes les 500ms
+setInterval(test_password, 500) // Effectue la fonction test_password toutes les 500ms

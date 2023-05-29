@@ -18,7 +18,7 @@ CREATE TABLE  produit  (
 	prixTTC  FLOAT(4,2) NOT NULL,
 	designation  VARCHAR(100) NOT NULL,
 	forfaitLivraison  int(3) NOT NULL,
-	image TEXT NOT NULL,
+	images TEXT NOT NULL,
 	CONSTRAINT fk_Cat FOREIGN KEY (idCat) REFERENCES categorieproduit(idCat) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_Forfait FOREIGN KEY (forfaitLivraison) REFERENCES forfaitLivraison(idForfait) ON DELETE CASCADE ON UPDATE CASCADE
 )  ;
@@ -58,15 +58,15 @@ INSERT INTO categorieproduit (intitule, description) VALUES ('Manufacture', 'Pro
 -- Vider tout les tuples de categorieproduit :
 -- DELETE FROM produit ;
 
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Nourriture'), 100.00, 'Carton haribos', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/image/haribo.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 349.99, 'Nintendo Switch', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/image/ninteno_switch.webp') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 599.99, 'PS5', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/image/ps5.webp') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Cuisine'), 68.99, 'carton de machines à café', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 3), 'media/image/machine_a_cafe.webp') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Pharmacie'), 200.00, 'Carton dentifrices', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/image/dentifrice.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Pétrole'), 300.00, 'Diesel', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 5), 'media/image/diesel.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Construction'), 200.00, 'lot de 10 planches', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 6), 'media/image/planches.webp') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Chimique'), 150.00, 'Desinfectants', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/image/desinfectant.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Textile'), 500.00, 'Pulls', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/image/pull.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Textile'), 400.00, 'short', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/image/short.webp') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Automobile'), 249.99, 'lot de 5 Pneux', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 7), 'media/image/pneu.jpg') ;
-INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, image ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Manufacture'), 199.99, 'carton de films plastiques', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/image/film_plastique.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Nourriture'), 100.00, 'Carton haribos', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/images/haribo.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 349.99, 'Nintendo Switch', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/images/ninteno_switch.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Electronique'), 599.99, 'PS5', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/images/ps5.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Cuisine'), 68.99, 'carton de machines à café', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 3), 'media/images/machine_a_cafe.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Pharmacie'), 200.00, 'Carton dentifrices', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/images/dentifrice.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Pétrole'), 300.00, 'Diesel', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 5), 'media/images/diesel.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Construction'), 200.00, 'lot de 10 planches', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 6), 'media/images/planches.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Chimique'), 150.00, 'Desinfectants', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/images/desinfectant.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Textile'), 500.00, 'Pulls', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/images/pull.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Textile'), 400.00, 'short', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 2), 'media/images/short.webp') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Automobile'), 249.99, 'lot de 5 Pneux', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 7), 'media/images/pneu.jpg') ;
+INSERT INTO produit ( idCat, prixTTC, designation, forfaitLivraison, images ) VALUES ( (SELECT idCat FROM categorieproduit WHERE intitule='Manufacture'), 199.99, 'carton de films plastiques', (SELECT idForfait FROM forfaitlivraison WHERE idForfait = 1), 'media/images/film_plastique.webp') ;
